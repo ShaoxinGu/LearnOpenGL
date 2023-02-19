@@ -68,6 +68,7 @@ int main(void)
     
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
+        shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
         Texture texture("res/textures/Hazel_Logo.png");
         texture.Bind();
@@ -89,7 +90,7 @@ int main(void)
             renderer.Clear();
 
             shader.Bind();
-
+            shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
             renderer.Draw(va, ib, shader);
 
             r += increment;
