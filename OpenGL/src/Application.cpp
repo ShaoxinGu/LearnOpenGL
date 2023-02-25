@@ -14,6 +14,8 @@
 
 #include "tests/TestClearColor.h"
 #include "tests/TestTexture2D.h"
+#include "tests/TestBatchColor.h"
+#include "tests/TestBatchTexture.h"
 
 int main(void)
 {
@@ -36,9 +38,9 @@ int main(void)
 
     glfwSwapInterval(1);
 
-    const char* glsl_version = "#version 330";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    const char* glsl_version = "#version 450";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -65,10 +67,12 @@ int main(void)
         currentTest = testMenu;
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
-
+        testMenu->RegisterTest<test::TestBatchColor>("Batch Color");
+        testMenu->RegisterTest<test::TestBatchTexture>("Batch Texture");
+        
         while (!glfwWindowShouldClose(window))
         {
-            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+            GLCall(glClearColor(0.2f, 0.2f, 0.2f, 1.0f));
             renderer.Clear();
 
             ImGui_ImplOpenGL3_NewFrame();

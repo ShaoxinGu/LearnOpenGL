@@ -9,7 +9,6 @@ namespace test
 		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
 		m_TranslationA(200, 200, 0),
 		m_TranslationB(400, 200, 0)
-		
 	{
 		float positions[] = {
 			-50.0f, -50.0f, 0.0f, 0.0f, // 0
@@ -35,7 +34,8 @@ namespace test
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
 
-		m_Texture = std::make_unique<Texture>("res/textures/logo.jpg");
+		m_Texture = std::make_unique<Texture>("res/textures/ChernoLogo.png");
+		m_Texture->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
 	}
 
@@ -49,12 +49,10 @@ namespace test
 
 	void TestTexture2D::OnRender()
 	{
-		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+		GLCall(glClearColor(0.2f, 0.2f, 0.2f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		Renderer m_renderer;
-		m_Texture->Bind();
-
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
 			glm::mat4 mvp = m_Proj * m_View * model;
